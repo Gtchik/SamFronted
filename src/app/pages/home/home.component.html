@@ -1,0 +1,19 @@
+
+        
+<div class="row pt-0 px-0 m-0">
+    <div class="col-5"></div>
+    <div class="col-6">
+        <h5 class="row pt-0 px-0 m-0">par la team Clément PEULET</h5>
+    </div>
+</div>
+
+<div class="row mx-0">
+    <div class="col-md-4 col-11 mx-auto d-block px-0 mt-5">
+        <button nz-button (click)="openModal(nzLoginTpl)"  nzType="primary" class="d-block mx-auto" nzSize="large"><i nz-icon nzType="user" nzTheme="outline"></i> Se Connecter</button>
+    </div>
+</div>
+
+
+<ng-template #nzLoginTpl>
+    <app-login (authWork)="destroyModal()"></app-login>
+</ng-template>

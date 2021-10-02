@@ -1,0 +1,12 @@
+.mission:hover{
+    background: linear-gradient(
+            115deg,
+            rgba(20, 50, 236, 0.2),
+            rgba(50, 100, 236, 0.2) 50%
+        );
+}
+
+.mission{
+    cursor: pointer;
+    box-shadow: 1px;
+}

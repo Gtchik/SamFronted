@@ -1,0 +1,30 @@
+
+<div class="row mx-0" *ngFor="let mission of missions">
+    <div class="mission col-lg-4 col-md-6 col-sm-10 col-10 mx-auto d-block hover-overlay p-3 rounded-3 mt-2">
+        <div class="row text-center" (contextmenu)="onRightClick($event, nzRightTpl, mission._id)" (click)="click(mission._id)">
+            <h2 class="col-2 justify-content-center">
+                <span >{{mission.icon}}</span> 
+               </h2>
+            <h2 class="col-8">{{ mission.title | uppercase}}</h2>
+            <h5 class="col-2 mission-number text-center">90%</h5>
+        </div>
+        
+    </div>
+    
+</div>
+<div class="row mx-0" *ngIf="admin">
+    <div class="col-md-4 col-11 mx-auto d-block px-0 mt-5">
+        <a nz-button (click)="createNew(nzTpl)"  nzType="default" class="d-block mx-auto" nzSize="large"><i nz-icon nzType="plus-circle" nzTheme="outline"></i>Créer nouvelle mission</a>
+    </div>
+</div>
+
+<ng-template #nzTpl>
+    <app-form-mission (formWork)="formValidate()"></app-form-mission>
+</ng-template>
+<ng-template #nzTplEdit>
+    <app-form-mission (formWork)="formValidate()" [id]="idSelected"></app-form-mission>
+</ng-template>
+<ng-template #nzRightTpl>
+    <button nz-button class="btn btn-warning d-block mx-auto mb-2" nzType="primary" nzSize="large" (click)="edit(nzTplEdit)">Modifier</button>
+    <button nz-button class="d-block mx-auto" nzType="primary" nzSize="large" nzDanger (click)="delete()">Supprimer</button>
+</ng-template>

@@ -1,0 +1,75 @@
+
+<div class="row" *ngFor="let step of steps" >
+    <ng-container
+        *ngIf="!step.isChecked"
+        [ngTemplateOutlet]="stepView"
+        [ngTemplateOutletContext]="{step:step}">        
+    </ng-container>
+</div> 
+
+<div class="row mx-0" *ngIf="admin">
+    <div class="col-md-4 col-11 mx-auto d-block px-0 mt-5">
+        <a nz-button (click)="createNew(nzTpl)"  nzType="default" class="d-block mx-auto" nzSize="large"><i nz-icon nzType="plus-circle" nzTheme="outline"></i>Créer nouvelle étape</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-10 col-10 mx-auto d-block hover-overlay p-3">
+        <nz-divider nzDashed [nzText]="'Tâche(s) déja validée(s)'"></nz-divider>
+    </div>
+</div>
+
+<div class="row" *ngFor="let step of steps" >
+    <ng-container
+        *ngIf="step.isChecked"
+        [ngTemplateOutlet]="stepView"
+        [ngTemplateOutletContext]="{step:step}">        
+    </ng-container>
+</div> 
+       
+
+<ng-template #stepView let-step='step'>
+    <div class="step col-lg-4 col-md-6 col-sm-10 col-10 mx-auto d-block hover-overlay p-3 rounded-3 mt-2"
+        (mouseover)="over(step.key, true)" 
+        (mouseout)="over(step.key, false)"
+        [ngStyle]="{'background': step.isOver || step.isExpanded?'linear-gradient(
+            115deg,
+            rgba(20, 50, 236, 0.2),
+            rgba(50, 100, 236, 0.2) 50%
+        )':'', 'cursor':'pointer'}"
+        (click)="expand(step.key)"
+        >
+        
+        <div class="row text-center"
+        (contextmenu)="onRightClick($event, nzRightTpl, step.key)">
+            <h2 class="col-2 justify-content-center">
+                <span *ngIf="!step.isOver && !step.isExpanded">{{step.icon}}</span> 
+                <label class="align-self-center" nz-checkbox [(ngModel)]="step.isChecked" (ngModelChange)="check(step.key)" *ngIf="step.isOver || step.isExpanded"></label>
+            </h2>
+            <h2 class="col-8">{{ step.title | uppercase}}</h2>
+            <h2 class="col-2 step-number text-center" [ngStyle]="{'color': step.isChecked?'green':'red'}">{{ step.stepNumber }}</h2>
+        </div>
+        <div class="row mt-2" *ngIf="step.isExpanded">
+            <nz-divider></nz-divider>
+            <div class="col-1"></div>
+            <h4 class="col-3">Méthode : </h4>
+            <h6 class="col-8 mr-1 mt-1">{{step.method}}</h6>
+        </div>
+        <div class="row mt-1" *ngIf="step.isExpanded">
+            <div class="col-1"></div>
+            <h4 class="col-3">Outils : </h4>
+            <h6 class="col-8 mr-1 mt-1" [innerHTML]="step.tools"></h6>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #nzTpl>
+    <app-form-step (formWork)="formValidate()" [missionId]="missionId"></app-form-step>
+</ng-template>
+<ng-template #nzTplEdit>
+    <app-form-step (formWork)="formValidate()" [id]="idSelected" [missionId]="missionId"></app-form-step>
+</ng-template>
+<ng-template #nzRightTpl>
+    <button nz-button class="btn btn-warning d-block mx-auto mb-2" nzType="primary" nzSize="large" (click)="edit(nzTplEdit)">Modifier</button>
+    <button nz-button class="d-block mx-auto" nzType="primary" nzSize="large" nzDanger (click)="delete()">Supprimer</button>
+</ng-template>

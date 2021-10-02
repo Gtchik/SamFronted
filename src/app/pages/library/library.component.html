@@ -1,0 +1,26 @@
+
+        <div class="row mx-0" *ngFor="let library of librarys" (contextmenu)="onRightClick($event, nzRightTpl, library._id)">
+            <div class="col-md-4 col-11 mx-auto d-block px-0 mt-2">
+               <a nz-button href={{library.link}} target="_blank"  nzType="primary" class="d-block mx-auto" nzSize="large">{{library.title}}</a>
+            </div>
+        </div>
+        <div class="row mx-0" *ngIf="admin">
+            <div class="col-md-4 col-11 mx-auto d-block px-0 mt-5">
+               <a nz-button (click)="createNew(nzTpl)"  nzType="default" class="d-block mx-auto" nzSize="large"><i nz-icon nzType="plus-circle" nzTheme="outline"></i>Créer nouveau lien</a>
+            </div>
+        </div>
+
+
+<ng-template #nzTpl>
+    <app-form-library (formWork)="formValidate()"></app-form-library>
+</ng-template>
+<ng-template #nzTplEdit>
+    <app-form-library (formWork)="formValidate()" [id]="idSelected"></app-form-library>
+</ng-template>
+<ng-template #nzRightTpl>
+    <button nz-button class="btn btn-warning d-block mx-auto mb-2" nzType="primary" nzSize="large" (click)="edit(nzTplEdit)">Modifier</button>
+    <button nz-button class="d-block mx-auto" nzType="primary" nzSize="large" nzDanger (click)="delete()">Supprimer</button>
+</ng-template>
+
+
+<div data-tf-sidetab="Ed1diqxL" data-tf-width="320" data-tf-height="400" data-tf-button-color="#379CFB" data-tf-button-text="Bienvenue !" style="all:unset;"></div><script src="//embed.typeform.com/next/embed.js"></script>

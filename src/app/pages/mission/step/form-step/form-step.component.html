@@ -1,0 +1,44 @@
+<form nz-form [formGroup]="validateForm" class="library-form" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your title!">
+        <nz-input-group nzPrefixIcon="user">
+          <input type="text" nz-input formControlName="title" placeholder="Titre" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your Password!">
+        <nz-input-group nzPrefixIcon="lock">
+          <input type="text" nz-input formControlName="icon" placeholder="icon" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your title!">
+          <nz-input-group nzPrefixIcon="user">
+            <input type="number" nz-input formControlName="stepNumber" placeholder="numéro d'étape" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your title!">
+            <textarea
+                formControlName="method" 
+                nz-input
+                placeholder="Description de la méthode"
+                [nzAutosize]="{ minRows: 2, maxRows: 6 }"
+            ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your title!">
+            <textarea
+                formControlName="tools" 
+                nz-input
+                placeholder="Description des outils (html authorisé)"
+                [nzAutosize]="{ minRows: 2, maxRows: 6 }"
+            ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Valider</button>
+  </form>
